@@ -48,3 +48,6 @@ For bug reports, technical questions, or improvement suggestions regarding the b
 This book incorporates generative AI (Large Language Models) in its composition, information gathering, and drafting processes. While the author has verified the content, no guarantees are made regarding its completeness or the functionality of the code provided.
 
 © 2026 Josiah Rui Tuite. All rights reserved.
+
+[日本語版 README (README.ja.md) はこちら](https://github.com/josiah-rui-tuite/Loop-Engineering/blob/main/README.ja.md)
+
