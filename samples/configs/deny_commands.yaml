@@ -1,0 +1,17 @@
+# 本サンプルは書籍「Loop Engineering 大全」付属の参考実装です(AS IS)。第5章・第16章より。
+# security/deny_commands.yaml ― 危険コマンドの拒否リスト(権限境界)
+# 「許可」ではなく「拒否」で線引きする。既定権限は最小から始め、書き込みは承認制で後から開放する。
+deny:                              # 無条件ブロック(破壊・流出)
+  - "rm -rf /*"
+  - "rm -rf *"
+  - "git push --force*"
+  - "git reset --hard*"
+  - "curl * | sh"                  # 外部スクリプト直実行=流出の遮断
+  - "chmod -R 777*"
+  - "* prod-db *"                  # 本番DBへの書込み禁止(read-only 資産)
+require_human_approval:            # 実行前に人間の承認を必須化
+  - "git push*"
+  - "docker *"
+  - "npm run migrate*"             # DBマイグレーション
+  - "* deploy *"                   # デプロイ
+  - "* --prod*"

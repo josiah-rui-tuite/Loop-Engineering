@@ -1,0 +1,10 @@
+# 本サンプルは書籍「Loop Engineering 大全」付属の参考実装です(AS IS)。第5章「タスクリストアプリ」より。
+# 契約面その1: acceptance.yaml ― 入出力・受入基準を"先に"固定(完了の定義)
+feature: task-crud
+scenarios: e2e/task-crud.spec.ts
+fixtures: { seed: fixtures/tasks.seed.json }   # 決定論的な初期データ
+flows: [create, list, complete, delete]
+gate:
+  acceptance_pass_rate_min: 1.0   # 受入シナリオは全通過(=この機能の合格条件)
+  e2e_scenarios_min: 8
+  no_regression: true             # 既存スイートを壊さないこと
