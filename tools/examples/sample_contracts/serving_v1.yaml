@@ -1,0 +1,12 @@
+# 配置先: (生成物の例。skill で自分の環境向けに作り直す)
+# 配布元: loop_engineering/tools/examples/sample_contracts/serving_v1.yaml
+contract: analytics.orders_daily
+grain: 1行=注文明細1件
+freshness_sla:
+  bi: 24h
+columns:
+  - { name: order_id,        type: string,        nullable: false, pk: true }
+  - { name: ordered_at,      type: timestamp,     nullable: false }
+  - { name: customer_region, type: string,        nullable: true }
+  - { name: amount,          type: decimal(12,2), nullable: false }
+change_policy: freeze

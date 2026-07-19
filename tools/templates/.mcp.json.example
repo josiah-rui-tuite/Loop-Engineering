@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "minimal": {
+      "command": "python",
+      "args": ["mcp/server.py"]
+    }
+  }
+}

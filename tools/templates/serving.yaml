@@ -1,0 +1,47 @@
+# 配置先: contracts/serving.yaml
+# 配布元: loop_engineering/tools/templates/serving.yaml
+# 提供層スキーマ契約。検討ループを回す前にこれを凍結し、以降の全案はこれを満たす前提で起草する。
+# 自分のドメインへ置き換える箇所は <> で示す。値はすべて埋めてあるので、消さずに書き換える。
+
+contract: analytics.orders_daily        # <提供層のテーブル完全修飾名>
+owner: data-platform@example.com        # 契約の責任者(再凍結の承認者)
+version: 1                              # 非互換変更のたびに +1 する
+grain: 1行=注文明細1件                  # <粒度>。集計単位を1文で言い切る。曖昧なら凍結してはいけない
+partition_by: ordered_at (日次)         # 走査量とコストを決めるので契約に含める
+
+freshness_sla:                          # 鮮度SLA。案の合否をゲートが機械判定する根拠
+  bi: 24h                               # BI 向け。日次ロードで満たす
+  near_realtime_subset: 15m             # 一部の準リアルタイム系列のみ
+
+keys:
+  primary: [order_id, line_no]          # 主キー。grain と一致していること
+  natural: [order_id]                   # 業務上の識別子
+  foreign:
+    - column: customer_id
+      references: master.customers.customer_id
+
+columns:                                # 列名/型/NULL可否/主キー。型は物理型まで書く
+  - { name: order_id,        type: string,        nullable: false, pk: true }
+  - { name: line_no,         type: int,           nullable: false, pk: true }
+  - { name: ordered_at,      type: timestamp,     nullable: false }
+  - { name: customer_id,     type: string,        nullable: false }
+  - { name: customer_region, type: string,        nullable: true }
+  - { name: amount,          type: decimal(12,2), nullable: false }
+  - { name: currency,        type: string,        nullable: false }
+
+governance:
+  pii_columns: [customer_id, customer_region]   # 実値はサンプルデータへ入れない
+  access: [role_bi_reader, role_ml_reader]      # 参照を許すロール
+  retention: 2555d                              # 保持期間(7年)
+  lineage_required: true                        # 収集から提供までの系譜を追えること
+
+change_policy: freeze                   # 変更は再凍結の承認が必要
+compatible_changes:                     # 承認なしで許す変更(schema_gate.py が exit 0 にする)
+  - nullable な列の追加
+  - コメント/説明の変更
+breaking_changes:                       # 再凍結の承認が要る変更(schema_gate.py が exit 1 にする)
+  - 列の削除・改名
+  - 型の変更
+  - grain の変更
+  - nullable でない列の追加(既存の書き手が壊れる)
+deprecation: 非互換変更は新 contract を並走させ、90日の移行期間後に旧を停止する

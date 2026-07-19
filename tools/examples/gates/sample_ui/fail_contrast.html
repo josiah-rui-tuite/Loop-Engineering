@@ -1,0 +1,23 @@
+<!-- 配置先: (生成物の例。skill で自分の環境向けに作り直す)
+<!-- 配布元: loop_engineering/tools/examples/gates/sample_ui/fail_contrast.html
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><title>コントラスト不足の例</title></head>
+<body style="color:#1a1a1a;background-color:#ffffff">
+<h1>A ライン 稼働状況</h1>
+
+<!-- 薄い灰色の文字を白地に置いた。比は 4.5:1 を下回る。 -->
+<div class="metric" id="line1" data-value="120" data-unit="台"
+     data-updated="2026-07-19T08:00" style="color:#a9b0bb;background-color:#ffffff">
+  <span>1 号機</span> <strong>120 台</strong> <time>08:00</time>
+</div>
+
+<div class="metric" id="line2" data-value="80" data-unit="台"
+     data-updated="2026-07-19T08:00" style="color:#1a1a1a;background-color:#f2f4f7">
+  <span>2 号機</span> <strong>80 台</strong> <time>08:00</time>
+</div>
+
+<div class="metric" id="total" data-sum-of="line1,line2" data-value="200" data-unit="台"
+     data-updated="2026-07-19T08:00" style="color:#ffffff;background-color:#1f3a5f">
+  <span>合計</span> <strong>200 台</strong> <time>08:00</time>
+</div>
+</body></html>
