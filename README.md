@@ -1,6 +1,7 @@
 # The Loop Engineering Compendium
 
-This repository serves as the official companion for *The Loop Engineering Compendium*, a technical guide on architecting and controlling autonomous AI agent systems.
+This repository serves as the official companion for *The Loop Engineering Compendium*, a technical guide on architecting and controlling autonomous AI agent systems.  
+
 📚 [Available on Amazon JP](https://www.amazon.co.jp/dp/B0H8GLM2QT)
 
 
