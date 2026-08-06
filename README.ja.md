@@ -2,6 +2,7 @@
 
 AIエージェントの自律化を設計・制御するための体系的アプローチ、「Loop Engineering」の全貌を解説した技術書です。
 2026.07.19 最新版アップデート公開中
+
 📚 [Amazonで書籍をチェックする](https://www.amazon.co.jp/dp/B0H8GLM2QT)
 
 ## 本書のサマリ
