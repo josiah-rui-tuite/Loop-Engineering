@@ -1,6 +1,8 @@
 # The Loop Engineering Compendium
 
 This repository serves as the official companion for *The Loop Engineering Compendium*, a technical guide on architecting and controlling autonomous AI agent systems.
+📚 [Available on Amazon JP](https://www.amazon.co.jp/dp/B0H8GLM2QT)
+
 
 ## Summary
 **Loop Engineering** is a technical discipline for designing, operating, and improving recursive feedback loops for AI agents. Instead of humans manually prompting agents turn-by-turn, Loop Engineering focuses on the loop itself: *Objective Discovery → Context Acquisition → Planning → Execution → Observation → Verification → Adjustment → State Preservation → Next Action/Human Handoff*.
